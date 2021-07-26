@@ -1,0 +1,164 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            background-color: #FFEFD5;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            max-width: 960px;
+            /* keeps from getting too large on wide screen */
+            width: 90%;
+            /* shrink to fit screen */
+            margin: auto;
+            /* center in html element */
+            background-color: #fff;
+            padding: 20px;
+            min-height: 100%;
+            /* keeps from getting too large on wide screen */
+        }
+
+        img.flexible {
+            /*float: right;*/
+            display: inline-block;
+            padding: 20px;
+            max-width: 300px;
+            /* actual size of image */
+            width: auto;
+            height: auto;
+            /* approximate size taken on screen in maximum view */
+        }
+
+        p {
+            margin: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 10px;
+        }
+
+        h1.masthead {
+            margin-top: 0;
+        }
+
+        footer {
+            text-align: center;
+            clear: both;
+            /* ride below all items */
+        }
+
+        nav {
+            text-align: center;
+            /* centers the nav */
+        }
+
+        nav ul {
+            list-style: none;
+            /* removes the bullets */
+        }
+
+        nav ul li {
+            display: inline-block;
+            /* makes horizontal, but able to declare margins */
+            margin: 0 2%;
+            /* margin left-right, gets smaller as necessary */
+        }
+
+        nav a:hover {
+            text-decoration: none;
+        }
+
+        ol {
+           margin-left: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>DOM Play</h1>
+    <p>This is a web page that uses JavaScript to create a small, single page application using the DOM.</p>
+    <h3>The webpage will consist of:</h3>
+    <ol>
+        <li>With a single click, the page highlights (bold or otherwise) all lines for a specific actor in a play</li>
+        <li>Un-highlight (normal or otherwise) all lines from all other actors in the play</li>
+        <li>The function(s) created to do the work must accommodate any number of actors, and any number of additional lines added to the page</li>
+        <li>The page works without page re-loads (i.e. it must be done via JavaScript and the DOM)</li>
+        <li>The page doesn't use a third party API (jQuery, for example)</li>
+        <li>HTML "hooks" may be added to the page, meaning one can edit the HTML to enable your scripts to perform properly</li>
+    </ol>
+    <h3>Movie Synopsis</h3>
+    <p>When college senior Anastasia Steele (Dakota Johnson) steps in for her sick roommate to interview prominent businessman Christian Grey (Jamie Dornan) for their campus paper, little does she realize the path her life will take. Christian, as enigmatic as he is rich and powerful, finds himself strangely drawn to Ana, and she to him.</p>
+    
+    <div id="play">
+
+    <h3>Movie Script</h3>
+        <p><span data-actor="anastasia"><span style="font-weight:bold">Anastasia: </span> Is this what you really want? You want to…you want to see me like
+                this?</span></p>
+        <p><span data-actor="christian"><span style="font-weight:bold">Christian: </span> Ana.</span></p>
+        <p><span data-actor="anastasia"><span style="font-weight:bold">Anastasia: </span> Don’t come near me. Does this give you pleasure?</span></p>
+        <p><span data-actor="christian"><span style="font-weight:bold">Christian: </span> [Christian goes to take step closer to her]</span></p>
+        <p><span data-actor="anastasia"><span style="font-weight:bold">Anastasia: </span> You’ll never do that to me again. I’m not what you want.</span></p>
+        <p><span data-actor="christian"><span style="font-weight:bold">Christian: </span> No, you’re…you are everything that I want.</span></p>
+        <p><span data-actor="anastasia"><span style="font-weight:bold">Anastasia: </span> I’ve fallen in love with you.</span></p>
+        <p><span data-actor="bill"><span style="font-weight:bold">Bill: </span> Are we talking about the right DOM Play here?</span></p>
+
+    </div>
+    <script>
+        const spans = document.querySelectorAll('div#play span');
+
+        console.log(spans);
+
+        for (const mySpan of spans) {
+            mySpan.addEventListener('click', function (ev) {
+                //alert(mySpan.dataset.actor);
+                highlightActor(mySpan.dataset.actor);
+            });
+        }
+
+        function highlightActor(myActor) {
+
+
+            for (const mySpan of spans) {
+
+                if (myActor == mySpan.dataset.actor) {
+                    if (myActor == "anastasia") {
+                        mySpan.style.backgroundColor = '#FFDAB9';
+                    } else if (myActor == "bill") {
+                        mySpan.style.backgroundColor = '#EEE8AA';
+                    } else if (myActor == "christian") {
+                        mySpan.style.backgroundColor = '#FFE4B5';
+                    }
+                } else {
+                    mySpan.style.backgroundColor = 'white';
+                }
+        
+        }
+
+
+        }
+    </script>
+    <img src="https://hips.hearstapps.com/cosmouk.cdnds.net/cm/14/30/53d4fef43b14b_-_fifty-shades-cropped.jpg" alt="Ana and Christian" class="flexible" id="logo" style="float:right">
+</body>
+<footer>
+    <small>&copy; 2020 - <span id="copyright">Copyright goes here</span>, All Rights Reserved ~
+    <a href="https://validator.w3.org/check/referer" target="_blank">Valid HTML</a> ~
+    <a href="https://jigsaw.w3.org/css-validator/check?uri=referer" target="_blank">Valid CSS</a>
+    </small>
+  </footer>
+</html>
